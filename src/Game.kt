@@ -3,12 +3,15 @@ import java.util.*
 import kotlin.properties.Delegates
 import kotlin.random.Random.Default.nextInt
 
+//FOR HAVING THE ONLINE VERSION YOU HAVE TO LOOK AT ROW 83/84 THERE IS THE LINE THAT NEEDS TO BE CHANGED (AS WELL AS THE GAMELOOP ALLOWING MORE THAN 5 TRYS)
 class Game {
     var playerinput: Int = 0
     var digitArray: ArrayList<Int> = arrayListOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    // val createUniqueFourDigitNumber = { (0..9).shuffled().take(4).joinToString("") }     take 4 nimmt die ersten 4, shuffle mixed das set vorher; take liefert liste
+
     var randomArray: Array<Int> = arrayOf(0, 0, 0, 0)
     var inputArray: Array<Int> = arrayOf(0, 0, 0, 0)
-    var ergebnisArray: Array<Char> = arrayOf('0', '0', '0', '0')
+    var ergebnisArray: ArrayList<Char> = arrayListOf('0', '0', '0', '0')
 
 
     fun createRandomArray(): Array<Int> {
@@ -70,17 +73,22 @@ class Game {
                         "   |\n" +
                         "  ---")
                 println("You won - sexy little beast!")
+                this.gameMenu();
                 return
             }
 
 
             println("-------------------------------------")
             println("your result for the " + (gameCounter + 1) + " try: ")
-            ergebnisArray.forEach { print(it) }
+            /*ergebnisArray.shuffle()
+            ergebnisArray.forEach { print(it)} FOR ONLINE VERSION:ergebnisArray.forEach { print(it)*/
+            ergebnisArray.forEach { print(it)}
             println("\ntries left: " +(4-gameCounter))
             println("-------------------------------------")
             gameCounter++
             if (gameCounter == 5){
+                var ergebnis:String = randomArray.joinToString()
+                println("THE NUMBER WAS $ergebnis")
                 println("┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼\n" +
                         "███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀\n" +
                         "██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼█┼┼┼██┼██┼┼┼\n" +
@@ -106,6 +114,7 @@ class Game {
                         "┼┼┼┼┼┼┼┼▀▀██┼┼┼┼┼┼┼┼┼┼┼██▀▀┼┼┼┼┼┼┼┼┼\n" +
                         "┼┼┼┼┼┼┼┼┼┼▀▀┼┼┼┼┼┼┼┼┼┼┼▀▀┼┼┼┼┼┼┼┼┼┼┼\n" +
                         "┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼")
+                this.gameMenu();
 
             }
         }
